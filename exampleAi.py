@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-
+import numpy as np
 #przygotowanie danych
 (training_images, training_labels), (testing_images, testing_labels) = datasets.cifar10.load_data()
 
@@ -28,8 +28,10 @@ for i in range(16):
 plt.show()
 
 
+print("Rozmiar danych treningowych (images):", training_images.shape)
+print("Rozmiar danych treningowych (labels):", training_labels.shape)
 
-
+print(training_labels)
 
 #początek sieci neuronowej
 model = models.Sequential()
@@ -54,7 +56,7 @@ model.save('image_classifier.keras')
 """
 model = models.load_model('image_classifier.keras')
 
-img = cv.imread('deer.jpg')
+img = cv.imread('test_image/deer.jpg')
 img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 plt.imshow(img, cmap=plt.cm.binary)
 

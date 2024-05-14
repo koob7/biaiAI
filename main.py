@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+import numpy as np
+from vinzy_imgdata_importer import img_data_importer
 
 
 
@@ -17,6 +19,10 @@ labels = ['dog', 'horse', 'elephant', 'butterfly', 'hen', 'cat', 'cow', 'sheep',
 
 data_directory = 'D:/materialy_studia/przedmioty/biai/raw-img'
 
+x,y,m = img_data_importer(data_directory)
+print( x.shape)
+
+
 # Wczytywanie danych treningowych
 ds_train = tf.keras.preprocessing.image_dataset_from_directory(
     data_directory,
@@ -24,7 +30,7 @@ ds_train = tf.keras.preprocessing.image_dataset_from_directory(
     label_mode="int",
     class_names=['cane', 'cavallo', 'elefante', 'farfalla', 'gallina', 'gatto', 'mucca', 'pecora', 'ragno', 'scoiattolo'],
     #color_mode='grayscale',
-    batch_size=16,
+    batch_size=40,
     image_size=(200, 200),
     shuffle=True,
     seed=123,
@@ -39,7 +45,7 @@ ds_test = tf.keras.preprocessing.image_dataset_from_directory(
     label_mode="int",
     class_names=['cane', 'cavallo', 'elefante', 'farfalla', 'gallina', 'gatto', 'mucca', 'pecora', 'ragno', 'scoiattolo'],
     #color_mode='grayscale',
-    batch_size=16,
+    batch_size=40,
     image_size=(200, 200),
     shuffle=True,
     seed=123,
@@ -52,6 +58,12 @@ ds_test = tf.keras.preprocessing.image_dataset_from_directory(
 
 # Przypisanie danych testowych do zmiennych
 (testing_images, testing_labels) = next(iter(ds_test))
+
+
+print(len(training_images))
+print("Rozmiar danych treningowych (images):", training_images.shape)
+print("Rozmiar danych treningowych (labels):", training_labels.shape)
+
 
 training_images, testing_images = training_images/255, testing_images/255
 
