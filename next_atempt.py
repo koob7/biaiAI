@@ -66,36 +66,10 @@ train = data.take(train_size)
 val = data.skip(train_size).take(val_size)
 test = data.skip(train_size+val_size).take(test_size)
 
-"""
-model = Sequential()
-model.add(Conv2D(16, (3,3), 1, activation='relu', input_shape = (256,256,3)))#convolutional layer - filtruje cechy obrazu - 32 neurony, 3x3convolutional matrix, funkcja aktywacyjna, zdjęcie 32x32xRGB
-model.add(MaxPooling2D())#pooling layer - ogranicza liczbę informacji na obrazie
-
-model.add(Conv2D(32, (3,3), 1, activation='relu'))
-model.add(MaxPooling2D())
-
-model.add(Conv2D(16, (3,3), 1, activation='relu'))
-model.add(MaxPooling2D())
-
-model.add(Flatten())
-
-model.add(Dense(256, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-
-model.compile(optimizer='adam', loss=tf.losses.BinaryCrossentropy(), metrics=['accuracy'])
-model.summary()
-
-
-logdir='logs'
-tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
-hist = model.fit(train, epochs = 1, validation_data=val, callbacks=[tensorboard_callback])
-
-"""
 model = models.Sequential()
 model.add(Conv2D(32, (3,3), activation='relu', input_shape = (256,256,3)))
 model.add(MaxPooling2D((2,2)))
 model.add(Conv2D(64, (3,3), activation='relu'))
-model.add(MaxPooling2D((2,2)))
 model.add(MaxPooling2D((2,2)))
 model.add(Conv2D(64, (3,3), activation='relu'))
 model.add(Flatten())
@@ -107,11 +81,11 @@ model.summary()
 
 logdir='logs'
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
-model.fit(train, epochs = 10, validation_data=val, callbacks=[tensorboard_callback])
-#print(f"loss:{loss}")
-#print(f"Accurady: {accuracy}")
+hist = model.fit(train, epochs = 10, validation_data=val, callbacks=[tensorboard_callback])
 model.save('animal_classifier.keras')
-"""
+
+
+
 fig = plt.figure()
 plt.plot(hist.history['loss'], color='teal', label='loss')
 plt.plot(hist.history['val_loss'], color='orange', label='val_loss')
@@ -125,7 +99,7 @@ plt.plot(hist.history['val_accuracy'], color='orange', label='val_accuracy')
 fig.suptitle('Accuracy', fontsize=20)
 plt.legend(loc="upper left")
 plt.show()
-
+"""
 
 pre = Precision()
 re = Recall()
