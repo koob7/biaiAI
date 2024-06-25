@@ -1,0 +1,5 @@
+/raw-img/
+animal_classifier.keras
+animal_classifier_2.keras
+/logs/
+VGG16-transferlearning.keras

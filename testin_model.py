@@ -34,7 +34,7 @@ image_files = os.listdir(img_dir)
 for file in image_files:
     img_path = os.path.join(img_dir, file)
     img = cv2.imread(img_path)
-    img = cv2.resize(img, (256, 256))
+    img = cv2.resize(img, (100, 100))
 
     # Predict with model
     prediction = model.predict(np.array([img])/255)
