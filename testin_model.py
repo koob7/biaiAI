@@ -14,7 +14,7 @@ labels = ['butterfly', 'cat', 'chicken', 'cow', 'dog', 'elephant', 'horse', 'she
 
 
 # Load the trained model
-model = models.load_model('models/animals_classification_model.keras')
+model = models.load_model('animals_classification_model.keras')
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
 def select_image():
